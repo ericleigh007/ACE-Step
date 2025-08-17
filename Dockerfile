@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.6.0-runtime-ubuntu22.04 AS base
+FROM nvidia/cuda:12.9.0-runtime-ubuntu22.04 AS base
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -32,12 +32,12 @@ RUN useradd -m -u 1001 appuser
 WORKDIR /app
 
 # Clone the repository
-RUN git clone https://github.com/ace-step/ACE-Step.git .
+RUN git clone https://github.com/ericleigh007/ACE-Step.git .
 
 # Install specific PyTorch version compatible with CUDA 12.6
 RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir hf_transfer peft && \
-    pip3 install --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu126
+    pip3 install --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu129
 RUN pip3 install --no-cache-dir .
 
 # Ensure target directories for volumes exist and have correct initial ownership
